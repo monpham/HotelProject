@@ -1,0 +1,24 @@
+.table {
+    text-align: center;
+    font-size: 1.5em;
+    color: #4fc1f0;
+}
+
+.single-room-details .table th {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+
+#duplicate-error {
+    font-size: 2.5em;
+    color: red;
+    margin: 20px;
+    text-align: center;
+}
+
+
+
+
+

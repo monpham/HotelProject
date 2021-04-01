@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<th:block th:include="./include/adminHeader"></th:block>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+
+                </div>
+            </div>
+            <th:block th:include="./include/viewUserAfterLogin"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <th:block th:include="./include/adminMenu"></th:block>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+
+
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col style="width:15%">
+                                    <col style="width:12%">
+                                    <col style="width:12%">
+                                    <col style="width:60%">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>Mã đặt phòng</th>
+                                    <th>Người đại diện</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Thêm dịch vụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="booking: ${bookings}">
+                                    <td th:text="${booking.bookingCode}"></td>
+                                    <td th:text="${booking.bookingPerson.lastName} + ' ' + ${booking.bookingPerson.firstName}"></td>
+                                    <td th:text="${booking.bookingPerson.phone}"></td>
+                                    <td>
+                                        <form action="/admin/addServiceToBooking" method="POST" class="form-inline">
+                                            <input type="hidden" name="booking.bookingId"
+                                                   th:value="${booking.bookingId}">
+                                            <div>
+                                                <select name="service.serviceId" class="form-control">
+                                                    <option th:each="sv: ${services}" th:value="${sv.serviceId}"
+                                                            th:text="${sv.serviceName}"></option>
+                                                </select>
+                                                <input name="quantity" type="number" value="1" class="form-control"
+                                                       min="1" style="width: 10%;">
+                                                <label id="unitLabel">Cái</label>
+                                                <input type="submit" class="btn btn-primary" name="Thêm">
+                                                <a th:href="@{/admin/viewDetailConsumedService/__${booking.bookingId}__}"
+                                                   class="btn btn-warning" style="width: 36%; margin-right: 0">Xem
+                                                    Các dịch vụ dã dùng</a>
+                                            </div>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="./include/adminFooter"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="client/fragment::baseHeader(~{::title},~{::link},~{})">
+		<title>NHẬT - VƯƠNG HOTEL</title>
+		<link rel="stylesheet" href="/css/index.css">
+	</head>
+
+	<body>
+		<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+			your
+			browser</a>
+			to improve your experience.</p>
+		<![endif]-->
+
+		<!-- Pre Loader
+        ============================================ -->
+		<div class="preloader">
+			<div class="loading-center">
+				<div class="loading-center-absolute">
+					<div class="object object_one"></div>
+					<div class="object object_two"></div>
+					<div class="object object_three"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<!--Header section start-->
+			<div class="header-section">
+				<div class="bg-opacity"></div>
+				<div th:insert="client/fragment::navbar"></div>
+
+				<!--Welcome secton-->
+				<div class="welcome-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 col-sm-5">
+								<div class="booking-box">
+									<div class="booking-title">
+										<h3>Đặt phòng</h3>
+										<p>Chúng tôi có rất nhiều loại phòng khác nhau, xin nhập thông <tin></tin></p>
+									</div>
+									<div class="booking-form">
+										<form th:action="@{/search-available-room}" method="POST">
+											<div class="b-date arrive mb-15">
+												<input class="date-picker" type="text" id="checkInDate" name="checkInDate"
+													   placeholder="Ngày đến" required pattern="\d{2}\/\d{2}\/\d{4}" title="Bạn phải nhập theo đúng định dang dd/MM/yyyy">
+												<!--										<i class="mdi mdi-calendar-text"></i>-->
+											</div>
+											<div class="b-date departure mb-15">
+												<input class="date-picker" type="text" id="checkOutDate" name="checkOutDate"
+													   placeholder="Ngày đi" required pattern="\d{2}\/\d{2}\/\d{4}" title="Bạn phải nhập theo đúng định dang dd/MM/yyyy" >
+												<!--										<i class="mdi mdi-calendar-text"></i>-->
+											</div>
+											<div class="b-date mb-15"><input type="number" name="adults" placeholder="Số người lớn"
+																			 required min="1">
+											</div>
+											<div class="b-date mb-15"><input type="number" name="children"
+																			 placeholder="Số trẻ em" required min="1"></div>
+
+											<div class="submit-form">
+												<button type="submit">Tìm phòng trống</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-7">
+								<div class="welcome-text">
+									<h2>
+										<span></span> <span class="coloring">NHẬT-VƯƠNG HOTEL</span>
+									</h2>
+									<h1 class="cd-headline clip">
+										<span>MANG ĐẾN SỰ</span>
+										<span class="cd-words-wrapper coloring">
+                                        <b class="is-visible"> TIỆN NGHI</b>
+                                        <b>HÀI LÒNG</b>
+                                        <b>TẬN TÌNH</b>
+                                    </span>
+									</h1>
+									<p class="welcome-desc">Được xây dựng theo tiêu chuẩn 5 sao, Khách sạn NHẬT-VƯƠNG HOTEL Đà Nẵng nằm bên bờ biển Mỹ Khê xinh đẹp, sẽ mang đến cho du khách một không gian sang trọng, quý phái khi đển thăm thành phố Đà Nẵng.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Header section end -->
+			<!-- searchbar Start -->
+			<div th:replace="client/fragment::search-bar"></div>
+			<!-- search bar End -->
+			<!--About Section Title start-->
+			<!--About Section end-->
+			<!--Our Room start-->
+			<div class="our-room text-center ptb-80 white-bg">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-title mb-75">
+								<h2>our <span>Room</span></h2>
+								<!--						<p>There are many variations of passages of Lorem Ipsum available, but the majority have-->
+								<!--						   suffered by injected humour.</p>-->
+							</div>
+						</div>
+					</div>
+					<div class="our-room-show">
+						<div class="row">
+							<div class="carousel-list">
+								<div class="col-md-4" th:each="type: ${roomTypes}">
+									<div class="single-room">
+										<div class="room-img">
+											<img th:src="@{${type.roomTypeImages[0].path}}" alt="">
+											<a th:href="@{/room-type-detail(roomTypeId=${type.roomTypeId})}" class="btn btn-primary">Xem Chi Tiết</a>
+										</div>
+										<div class="room-desc">
+											<div class="room-name">
+												<h3><a href="#" th:text="${type.typeName}">Room type name</a></h3>
+											</div>
+											<div class="room-rent">
+												<h5> [[${#numbers.formatInteger(type.unitPrice, 0,'COMMA')}]] Đ/Đêm</h5>
+											</div>
+											<div class="room-book">
+												<a th:href="@{/book-by-type(roomTypeId=${type.roomTypeId})}">Đặt ngay</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Our room end-->
+			<!--Our services start-->
+			<!--	<div class="our-sevices text-center ptb-80 white_bg">-->
+			<!--		<div class="container">-->
+			<!--			<div class="row">-->
+			<!--				<div class="col-md-12">-->
+			<!--					<div class="section-title mb-80">-->
+			<!--						<h2>our <span>services</span></h2>-->
+			<!--						&lt;!&ndash;						<p>There are many variations of passages of Lorem Ipsum available, but the majority have&ndash;&gt;-->
+			<!--&lt;!&ndash;						   suffered by injected humour.</p>&ndash;&gt;-->
+			<!--					</div>-->
+			<!--				</div>-->
+			<!--			</div>-->
+			<!--		</div>-->
+			<!--		<div class="our-services-list">-->
+			<!--			<div class="container-fluid">-->
+			<!--				<div class="row">-->
+			<!--					<div class="col-md-3 col-sm-6 col-xs-12">-->
+			<!--						<div class="single-services">-->
+			<!--							<div class="services-img">-->
+			<!--								<img src="images/services/services1.jpg" alt="">-->
+			<!--								<div class="services-title">-->
+			<!--									<h2>Breakfast & Buffet</h2>-->
+			<!--								</div>-->
+			<!--								<div class="services-hover-desc">-->
+			<!--									<div class="services-hover-inner">-->
+			<!--										<div class="services-hover-table">-->
+			<!--											<div class="services-hover-table-cell">-->
+			<!--												<h2>Breakfast & Buffet</h2>-->
+			<!--												<p>There are many variations of passages Loem Ipsum available, but the-->
+			<!--												   majority have suffered alteration in some form, by injected-->
+			<!--												   humour.</p>-->
+			<!--											</div>-->
+			<!--										</div>-->
+			<!--									</div>-->
+			<!--								</div>-->
+			<!--							</div>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--					<div class="col-md-3 col-sm-6 col-xs-12">-->
+			<!--						<div class="single-services">-->
+			<!--							<div class="services-img">-->
+			<!--								<img src="images/services/services2.jpg" alt="">-->
+			<!--								<div class="services-title">-->
+			<!--									<h2>Towels and bedding</h2>-->
+			<!--								</div>-->
+			<!--								<div class="services-hover-desc">-->
+			<!--									<div class="services-hover-inner">-->
+			<!--										<div class="services-hover-table">-->
+			<!--											<div class="services-hover-table-cell">-->
+			<!--												<h2>Breakfast & Buffet</h2>-->
+			<!--												<p>There are many variations of passages Loem Ipsum available, but the-->
+			<!--												   majority have suffered alteration in some form, by injected-->
+			<!--												   humour.</p>-->
+			<!--											</div>-->
+			<!--										</div>-->
+			<!--									</div>-->
+			<!--								</div>-->
+			<!--							</div>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--					<div class="col-md-3 col-sm-6 col-xs-12">-->
+			<!--						<div class="single-services">-->
+			<!--							<div class="services-img">-->
+			<!--								<img src="images/services/services3.jpg" alt="">-->
+			<!--								<div class="services-title">-->
+			<!--									<h2>24/7 Reception</h2>-->
+			<!--								</div>-->
+			<!--								<div class="services-hover-desc">-->
+			<!--									<div class="services-hover-inner">-->
+			<!--										<div class="services-hover-table">-->
+			<!--											<div class="services-hover-table-cell">-->
+			<!--												<h2>24/7 Reception</h2>-->
+			<!--												<p>There are many variations of passages Loem Ipsum available, but the-->
+			<!--												   majority have suffered alteration in some form, by injected-->
+			<!--												   humour.</p>-->
+			<!--											</div>-->
+			<!--										</div>-->
+			<!--									</div>-->
+			<!--								</div>-->
+			<!--							</div>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--					<div class="col-md-3 col-sm-6 col-xs-12">-->
+			<!--						<div class="single-services">-->
+			<!--							<div class="services-img">-->
+			<!--								<img src="images/services/services4.jpg" alt="">-->
+			<!--								<div class="services-title">-->
+			<!--									<h2>City Tours</h2>-->
+			<!--								</div>-->
+			<!--								<div class="services-hover-desc">-->
+			<!--									<div class="services-hover-inner">-->
+			<!--										<div class="services-hover-table">-->
+			<!--											<div class="services-hover-table-cell">-->
+			<!--												<h2>City Tourst</h2>-->
+			<!--												<p>There are many variations of passages Loem Ipsum available, but the-->
+			<!--												   majority have suffered alteration in some form, by injected-->
+			<!--												   humour.</p>-->
+			<!--											</div>-->
+			<!--										</div>-->
+			<!--									</div>-->
+			<!--								</div>-->
+			<!--							</div>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--				</div>-->
+			<!--			</div>-->
+			<!--		</div>-->
+			<!--	</div>-->
+			<!--Our services end-->
+			<!--Our staff start-->
+			<!--Our staff end-->
+			<!--Testimonial start-->
+
+			<!--Testimonial end-->
+			<!--Our gallery start-->
+			<!--Our gallery end-->
+			<!--Our news start-->
+
+			<!--Our news end-->
+			<!--Hotel communities start-->
+			<!--Hotel communities end-->
+			<!--hotel team start-->
+
+			<!--hotel team end-->
+			<!--Footer starts -->
+			<th:block th:include="client/fragment::footer-copyright"></th:block>
+			<!-- Footer end -->
+
+			<div th:replace="client/fragment::javacriptLink"></div>
+			<script>
+				$(function () {
+					'use strict';
+					$.fn.datepicker.defaults.format = "dd/mm/yyyy";
+					var nowTemp = new Date(); //khai bao mot bien date
+					var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+					var checkin = $('#checkInDate').datepicker({
+						onRender: function (date) {
+							return date.valueOf() < now.valueOf() ? 'disabled' : '';
+						}
+					}).on('changeDate', function (ev) {
+						if (ev.date.valueOf() > checkout.date.valueOf()) {
+							var newDate = new Date(ev.date)
+							newDate.setDate(newDate.getDate() + 1);
+							checkout.setValue(newDate);
+						}
+						checkin.hide();
+						$('#checkOutDate')[0].focus();
+					}).data('datepicker');
+					var checkout = $('#checkOutDate').datepicker({
+						onRender: function (date) {
+							return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+						}
+					}).on('changeDate', function (ev) {
+						checkout.hide();
+					}).data('datepicker');
+				});
+			</script>
+
+		</div>
+	</body>
+
+</html>

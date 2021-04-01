@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+        <title>Hoàn tất đặt phòng</title>
+    </head>
+
+
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade
+                your
+                browser</a>
+            to improve your experience.</p>
+        <![endif]-->
+        <!-- Pre Loader
+        ============================================ -->
+        <div class="preloader">
+            <div class="loading-center">
+                <div class="loading-center-absolute">
+                    <div class="object object_one"></div>
+                    <div class="object object_two"></div>
+                    <div class="object object_three"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <!--Header section start-->
+            <div class="header-section booking_done">
+                <div class="bg-opacity"></div>
+                <div th:insert="client/fragment::navbar"></div>
+                <!--Welcome secton-->
+                <div class="welcome-section text-center ptb-110">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="breadcurbs-inner">
+                                    <div class="breadcrubs">
+                                        <h2>Booking</h2>
+                                        <div class="breadcrubs-menu">
+                                            <ul>
+                                                <li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
+                                                <li>Booking</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header section end-->
+            <!-- search bar Start -->
+            <div th:replace="client/fragment::search-bar"></div>
+            <!-- search bar End -->
+
+            <!--Room booking start-->
+            <div class="room-booking ptb-80 white_bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-title mb-80 text-center">
+                                <h2>ĐẶT PHÒNG THÀNH CÔNG</h2>
+<!--                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have-->
+<!--                                    suffered by injected humour.</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="booking-rooms-tab">
+                                <ul class="nav" role="tablist">
+                                    <li><a href="#booking" ><span
+                                            class="tab-border">1</span><span>Thông tin phòng</span></a></li>
+                                    <li><a href="#personal" ><span class="tab-border">2</span><span>Thông tin cá nhân</span></a>
+                                    </li>
+                                    <li><a href="#payment" ><span
+                                            class="tab-border">3</span><span>Thông tin thẻ</span></a></li>
+                                    <li class="active">
+                                        <a href="#done" data-toggle="tab"><span class="tab-border">4</span><span>Đặt thành công</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="service-tab-desc text-left mt-60">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane" id="booking">
+                                        <div class="booking-info-deatils"></div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="personal">
+                                        <div class="personal-info-details">
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="payment">
+
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane active" id="done">
+                                        <div class="booking-done">
+                                            <div class="booking-done-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2">Ngày đến</th>
+                                                            <th>[[${#temporals.format(booking.checkInDate,'dd-MM-yyyy')}]]</th>
+                                                            <th colspan="2">Ngày đi</th>
+                                                            <th>[[${#temporals.format(booking.checkOutDate,'dd-MM-yyyy')}]]</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Số phòng</th>
+                                                            <th>Loại phòng</th>
+                                                            <th>Người lớn</th>
+                                                            <th>Trẻ em</th>
+                                                            <th>Số Đêm</th>
+                                                            <th>Đơn giá</th>
+                                                            <th>Tiền phòng</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="item: ${booking.bookingDetails}">
+                                                            <td th:text="${item.room.roomNumber}"></td>
+                                                            <td th:text="${item.room.roomType.typeName}"></td>
+                                                            <td th:text="${item.adults}"></td>
+                                                            <td th:text="${item.chidren}"></td>
+                                                            <td th:text="${item.night}"></td>
+                                                            <td>[[${#numbers.formatInteger(item.room.roomType.unitPrice,
+                                                                0,'COMMA')}]] Đ
+                                                            </td>
+                                                            <td>[[${#numbers.formatInteger(item.subTotal, 0,'COMMA')}]]
+                                                                Đ
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th colspan="6">Tổng tiền</th>
+                                                            <th>[[${#numbers.formatInteger(booking.sumOfSubTotal,
+                                                                0,'COMMA')}]] Đ
+                                                            </th>
+                                                        </tr>
+                                                        <tr th:if="${booking.promotion}">
+                                                            <th colspan="6">Giảm giá</th>
+                                                            <th>
+                                                                [[${#numbers.formatInteger(booking.promotion.promotionValue,
+                                                                0,'COMMA')}]] Đ
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="6">Thanh toán</th>
+                                                            <th>[[${#numbers.formatInteger(booking.total, 0,'COMMA')}]]
+                                                                Đ
+                                                            </th>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                </table>
+                                            </div>
+                                            <div class="booking-done-description">
+                                                <div class="succesfully">
+                                                    <h3>Chúc mừng bạn đã Đặt Phòng thành công</h3>
+                                                    <p>Mã booking của bạn là:
+                                                        <span style="color:#3ac4fa; font-weight: bold; font-size: 1.5em">[[${bookingCode}]]</span>
+                                                    </p>
+                                                    <h4>Chúng tôi cũng đã gửi một email tới địa chỉ: <i>[[${booking.bookingPerson.email}]]</i>
+                                                    </h4>
+                                                    <h4 style="color: red">Lưu ý: Bạn chỉ có thể huỷ đặt phòng trước ngày [[${#temporals.format(booking.checkInDate,'dd-MM-yyyy')}]] </h4>
+                                                    <h4 style="color: red">Chúng tôi sẽ tính phí huỷ đặt phòng là   20% trên số tiền thanh toán</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Room booking end-->
+
+            <!--hotel team start-->
+
+            <!--hotel team end-->
+            <!--Footer start -->
+            <th:block th:include="client/fragment::footer-copyright"></th:block>
+            <!-- Footer end -->
+        </div>
+
+
+        <div th:replace="client/fragment::javacriptLink"></div>
+
+
+    </body>
+
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+        <title>Hoàn tất đặt phòng</title>
+    </head>
+
+
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade
+                your
+                browser</a>
+            to improve your experience.</p>
+        <![endif]-->
+        <!-- Pre Loader
+        ============================================ -->
+        <div class="preloader">
+            <div class="loading-center">
+                <div class="loading-center-absolute">
+                    <div class="object object_one"></div>
+                    <div class="object object_two"></div>
+                    <div class="object object_three"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <!--Header section start-->
+            <div class="header-section booking_done">
+                <div class="bg-opacity"></div>
+                <div th:insert="client/fragment::navbar"></div>
+                <!--Welcome secton-->
+                <div class="welcome-section text-center ptb-110">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="breadcurbs-inner">
+                                    <div class="breadcrubs">
+                                        <h2>Booking</h2>
+                                        <div class="breadcrubs-menu">
+                                            <ul>
+                                                <li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
+                                                <li>THÔNG TIN ĐẶT PHÒNG</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header section end-->
+            <!-- search bar Start -->
+            <div th:replace="client/fragment::search-bar"></div>
+            <!-- search bar End -->
+
+            <!--Room booking start-->
+            <div class="room-booking ptb-80 white_bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-title mb-80 text-center">
+                                <h2>TRA CỨU THÔNG TIN DẶT PHÒNG</h2>
+                                <!--                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have-->
+                                <!--                                    suffered by injected humour.</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+<!--bat dau phan content-->
+                        <div class="col-md-12">
+                            <div class="newsletter">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="newsletter-title">
+                                            <h2>Nhập mã đặt phòng để kiểm tra:</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="newsletter-form">
+                                            <form id="mc-form" class="mc-form loopkUpFrom" action="/booking-info" method="GET">
+                                                <input type="text" name="bookingCode" placeholder="Nhập mã booking" value="" required pattern="\w{4}-\w{4}-\w{4}" title="mã booking phải viết theo định dạng XXXX-XXXX-XXXX"/>
+                                                <button id="mc-submit" type="submit">Tìm kiếm</button>
+                                                <p th:class="not-found-error"></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!--ket thuc pha phan content-->
+                    </div>
+                </div>
+            </div>
+            <!--Room booking end-->
+
+            <!--hotel team start-->
+
+            <!--hotel team end-->
+            <!--Footer start -->
+            <th:block th:include="client/fragment::footer-copyright"></th:block>
+            <!-- Footer end -->
+        </div>
+
+
+        <div th:replace="client/fragment::javacriptLink"></div>
+
+
+    </body>
+
+</html>

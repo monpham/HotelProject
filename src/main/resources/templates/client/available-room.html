@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="client/fragment::baseHeader(~{::title},~{::link},~{})">
+	<title>Danh sách phòng trống</title>
+
+	<link rel="stylesheet" href="/css/available-room.css">
+</head>
+
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                                                                                                                       your
+                                                                                                                       browser</a>
+                          to improve your experience.</p>
+<![endif]-->
+<!-- Pre Loader
+============================================ -->
+<div class="preloader">
+	<div class="loading-center">
+		<div class="loading-center-absolute">
+			<div class="object object_one"></div>
+			<div class="object object_two"></div>
+			<div class="object object_three"></div>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper">
+	<!--Header section start-->
+	<div class="header-section about-us">
+		<div class="bg-opacity"></div>
+		<div th:insert="client/fragment::navbar"></div>
+
+		<!--Welcome secton-->
+		<div class="welcome-section text-center ptb-110">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="breadcurbs-inner">
+							<div class="breadcrubs">
+								<h2>Rooms</h2>
+								<div class="breadcrubs-menu">
+									<ul>
+										<li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
+										<li>[[${availableRooms.size()}]] Available Rooms</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Header section end-->
+	<!-- search bar Start -->
+	<div th:replace="client/fragment::search-bar"></div>
+	<!-- search bar End -->
+	<!--Room Section Title start-->
+	<div class="room-section text-center ptb-80 white_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title mb-75">
+						<h2><span>Tìm thấy [[${availableRooms.size()}]] phòng phù hợp</span></h2>
+<!--						<p>There are many variations of passages of Lorem Ipsum available, but the majority have-->
+<!--						   suffered by injected humour.</p>-->
+					</div>
+				</div>
+			</div>
+			<div class="our-room-show">
+				<div class="row">
+					<div class="our-room-list owl-pagination">
+						<div class="single-room-sapce">
+							<div th:if="${availableRooms.size()} == 0">
+								<h2>Rất tiếc không Có phòng nào phù hợp với thông
+								    tin bạn đã chọn, quay về <a href="javascript:history.back()">trang Trước đó</a></h2>
+							</div>
+							<div class="col-md-4 col-sm-6 col-xs-12" th:each="room:${availableRooms}">
+								<div class="single-room mb-80">
+									<div class="room-img">
+										<img th:src="@{${room.roomType.roomTypeImages[0].path}}" alt="">
+										<a th:href="@{/room-detail(roomId=${room.roomId})}" class="btn btn-primary">Xem chi tiết</a>
+									</div>
+									<div class="room-desc">
+										<div class="room-name">
+											<h3><a href="#" th:text="${room.roomType.typeName}"></a></h3>
+										</div>
+										<div class="room-Number">
+											<h3><a href="#" th:text="${room.roomNumber}"></a></h3>
+										</div>
+										<div class="room-rent">
+											<h5>[[${#numbers.formatInteger(room.roomType.unitPrice, 0,'COMMA')}]] Đ/Đêm</h5>
+										</div>
+										<div class="room-book">
+											<a th:href="@{/room-booking(roomId=${room.roomId})}">Đặt Ngay</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Room Section end-->
+	<!--hotel team start-->
+	<div class="hotel-team white_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+</div>
+			</div>
+		</div>
+
+	</div>
+	<!--hotel team end-->
+	<!--Footer start -->
+	<th:block th:include="client/fragment::footer-copyright"></th:block>
+	<!-- Footer end -->
+</div>
+
+
+<div th:replace="client/fragment::javacriptLink"></div>
+</body>
+
+</html>

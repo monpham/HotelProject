@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <th:block th:include="./include/adminHeader"></th:block>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                        </div>
+                    </div>
+
+                    <th:block th:include="./include/viewUserAfterLogin"></th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="row">
+                <th:block th:include="./include/adminMenu"></th:block>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="content-box-large">
+                                <div class="panel-body">
+                                    <h1 style="text-align: center; font-weight: bold">Danh sách các dịch vụ đã sử dụng</h1>
+                                    <h3>Mã Đặt phòng: [[${booking.bookingCode}]]</h3>
+                                    <h3>Người đại diện: [[${booking.bookingPerson.lastName} + ' ' + ${booking.bookingPerson.firstName}]]</h3>
+                                    <h3>Số điện thoại: [[${booking.bookingPerson.phone}]]</h3>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên dịch vụ</th>
+                                                <th>Ngày dùng</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn Vị tính</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="charge, stat: ${booking.charges}">
+                                                <td th:text="${stat.count}"></td>
+                                                <td th:text="${charge.service.serviceName}"></td>
+                                                <td>[[${#temporals.format(charge.chargeDate, 'dd-MM-yyyy HH:mm')}]]</td>
+                                                <td th:text="${charge.quantity}"></td>
+                                                <td th:text="${charge.service.unit}"></td>
+                                                <td>[[${#numbers.formatInteger(charge.service.unitPrice,0,'COMMA')}]] Đ</td>
+                                                <td>[[${#numbers.formatInteger(charge.total,0,'COMMA')}]] Đ</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="6">Tổng cộng</td>
+                                                <td>[[${#numbers.formatInteger(booking.totalCharge,0,'COMMA')}]] Đ</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <br>
+                                    <br>
+                                    <a th:href="@{/admin/viewPayPage/__${booking.bookingId}__}">ĐẾN TRANG THANH TOÁN</a>
+                                    <br>
+                                    <br>
+                                    <form th:action="@{/admin/viewDetailConsumedService/pdf}" method="GET">
+                                        <input  th:field="*{booking.bookingId}" type="hidden"/>
+                                        <button type="submit">IN HÓA ĐƠN THANH TOÁN</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <th:block th:include="./include/adminFooter"></th:block>
+
+    </body>
+</html>

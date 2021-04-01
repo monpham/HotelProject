@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+	<title>Huỷ đạt phòng thành công</title>
+</head>
+
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                                                                                                                       your
+                                                                                                                       browser</a>
+                          to improve your experience.</p>
+<![endif]-->
+
+<!-- Pre Loader
+============================================ -->
+<div class="preloader">
+	<div class="loading-center">
+		<div class="loading-center-absolute">
+			<div class="object object_one"></div>
+			<div class="object object_two"></div>
+			<div class="object object_three"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="wrapper">
+	<!--Header section start-->
+	<div class="header-section about-us">
+		<div class="bg-opacity"></div>
+		<div th:insert="client/fragment::navbar"></div>
+		<!-- ERROR AREA START -->
+		<div class="error-area text-center ptb-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 style="color: white;">Bạn đã huỷ đặt phòng thành công, quay Về <a href="/">trang chủ</a></h2>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Header section end-->
+	<!-- search bar Start -->
+	<div th:replace="client/fragment::search-bar"></div>
+	<!-- search bar End -->
+	<!-- Start page content -->
+
+
+
+	<th:block th:include="client/fragment::footer-copyright"></th:block>
+	<!-- Footer end -->
+</div>
+
+
+<div th:replace="client/fragment::javacriptLink"></div>
+</body>
+
+</html>

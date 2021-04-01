@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="baseHeader(title,links,scripts)">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title th:replace="${title}">Default tile</title>
+        <link href="images/apple-touch-icon.png" type="images/x-icon" rel="shortcut icon">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- All css files are included here. -->
+        <!-- Bootstrap fremwork main css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- This core.css file contents all plugings css file. -->
+        <link rel="stylesheet" href="/css/core.css">
+        <!-- Theme shortcodes/elements style -->
+        <link rel="stylesheet" href="/css/shortcode/shortcodes.css">
+        <!-- Theme main style -->
+        <link rel="stylesheet" href="/style.css">
+        <!-- Responsive css -->
+        <link rel="stylesheet" href="/css/responsive.css">
+
+        <!--custom css for all page-->
+        <link rel="stylesheet" href="/css/clientcustom.css">
+
+
+        <!-- Modernizr JS -->
+        <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+        <!--Addtional css, js-->
+        <th:block th:replace="${links}"/>
+        <th:block th:replace="${scripts}"/>
+
+
+    </head>
+    <body>
+
+        <div th:fragment="navbar" class="top-header sticky-header">
+            <div class="top-header-inner">
+                <div class="container">
+                    <div class="mgea-full-width">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <div class="logo mt-15">
+                                    <a href="/"><img src="images/logo/logo.png" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10 hidden-xs">
+                                <div class="header-top ptb-10">
+                                    <div class="adresses">
+                                        <div class="phone">
+                                            <p>call <span>+012 345 678 102 </span></p>
+                                        </div>
+                                        <div class="email">
+                                            <p>Email: <span>info@example.com</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="social-links">
+                                        <a href="#"><i class="mdi mdi-facebook"></i></a>
+                                        <a href="#"><i class="mdi mdi-rss"></i></a>
+                                        <a href="#"><i class="mdi mdi-google-plus"></i></a>
+                                        <a href="#"><i class="mdi mdi-pinterest"></i></a>
+                                        <a href="#"><i class="mdi mdi-instagram"></i></a>
+                                    </div>
+                                </div>
+                                <div class="menu mt-25">
+                                    <div class="menu-list hidden-sm hidden-xs">
+                                        <nav>
+                                            <ul>
+                                                <li><a href="/">Trang Chủ</a></li>
+                                                <li><a href="/lookup">Tra cứu đạt phòng</a></li>
+                                                <li><a href="/about-us">Về chúng tôi</a></li>
+                                                <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
+                                                    <ul class="dropdown_menu">
+                                                        <li><a href="/404">404</a></li>
+                                                        <li><a href="/booking-info">Booking Information</a></li>
+                                                        <li><a href="/personal-info">Personal Information</a></li>
+                                                        <li><a href="/payment-info">Parment Information</a></li>
+                                                        <li><a href="/booking-done">Booking Done</a></li>
+                                                        <li><a href="/room-booking">Room booking</a></li>
+                                                        <li><a href="/new">News</a></li>
+                                                        <li><a href="/gallery">Gallery</a></li>
+                                                        <li><a href="/staff">Staff</a></li>
+                                                        <li><a href="/our-room">Room</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="/contact-us">Liên Hệ</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="search-bar-icon">
+                                        <a class="search-open" href="#"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu start -->
+            <div class="mobile-menu-area hidden-lg hidden-md">
+                <div class="container">
+                    <div class="col-md-12">
+                        <nav id="dropdown" style="display: block;">
+                            <ul>
+                                <li><a href="/">home</a></li>
+                                <li><a href="about-us.html">About</a></li>
+                                <li><a href="/gallery">Gallery</a></li>
+                                <li><a href="#">pages</a>
+                                    <ul>
+                                        <li><a href="/404">404</a></li>
+                                        <li><a href="/booking-info">Booking Information</a></li>
+                                        <li><a href="/personal-info">Personal Information</a></li>
+                                        <li><a href="/payment-info">Parment Information</a></li>
+                                        <li><a href="/booking-done">Booking Done</a></li>
+                                        <li><a href="/room-booking">Room booking</a></li>
+                                        <li><a href="/new">News</a></li>
+                                        <li><a href="/gallery">Gallery</a></li>
+                                        <li><a href="/staff">Staff</a></li>
+                                        <li><a href="/our-room">Room</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/contactUs">contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu end -->
+        </div>
+
+        <div th:fragment="search-bar" class="search-bar animated slideOutUp">
+            <div class="table">
+                <div class="table-cell">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="search-form-wrap">
+                                    <button class="close-search"><i class="mdi mdi-close"></i></button>
+                                    <form action="/booking-info" method="GET" class="loopkUpFrom">
+                                        <input type="text" name="bookingCode" placeholder="Nhập mã booking" value="" required pattern="\w{4}-\w{4}-\w{4}" title="mã booking phải viết theo định dạng XXXX-XXXX-XXXX"/>
+                                        <button class="search-button" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
+
+                                    <p class="not-found-error"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:fragment="footer-copyright">
+            <div class="footer ptb-100">
+                <div class="footer-bg-opacity"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-footer mt-0">
+                                <div class="logo">
+                                    <img src="images/logo/logo.png" alt="">
+                                </div>
+                                <div class="f-adress">
+                                    <p><span>Address:</span> ur address goes here,
+                                        street Crossroad123.</p>
+                                </div>
+                                <div class="hotel-contact">
+                                    <p><span>phone:</span> 99 55 88586 5478.</p>
+                                    <p><span>Email:</span>info@example.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 hidden-sm col-xs-6">
+                            <div class="single-footer">
+                                <h3>Quick Links</h3>
+                                <div class="quick-item">
+                                    <ul>
+                                        <li><a href="#">Rooms</a></li>
+                                        <li><a href="#">Food &amp; Drinks</a></li>
+                                        <li><a href="#">Manifesto</a></li>
+                                        <li><a href="#">Beach Venues</a></li>
+                                        <li><a href="#">Wellness</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-footer">
+                                <h3>Get in touch</h3>
+                                <div class="get-touch">
+                                    <p>There are many varins of passages of Lorem Ipsum available, but</p>
+                                    <div class="get-conatct">
+                                        <form action="#">
+                                            <input type="text" value="Your name">
+                                            <input type="text" value="Your email">
+                                            <button type="submit">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="single-footer">
+                                <h3>instagram</h3>
+                                <div class="instagram-post">
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/ins-1.jpg" alt=""></a>
+                                    </div>
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/ins-2.jpg" alt=""></a>
+                                    </div>
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/ins-3.jpg" alt=""></a>
+                                    </div>
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/ins-4.jpg" alt=""></a>
+                                    </div>
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/ins-5.jpg" alt=""></a>
+                                    </div>
+                                    <div class="single-post">
+                                        <a href="#"><img src="images/instagram/img-6.jpg" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright ptb-20 white_bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
+                            <p>Copyright© NHẬT-VƯƠNG HOTEL 2021.All right reserved.Created by
+                                <a href="https://freethemescloud.com/"> Free
+                                    themes
+                                    Cloud</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-sm-4 col-xs-12">
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="#">Privacy policy</a></li>
+                                    <li><a href="#">Term of use</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:fragment="javacriptLink">
+            <!-- Placed js at the end of the document so the pages load faster -->
+
+            <!-- jquery latest version -->
+            <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+            <!-- Bootstrap framework js -->
+            <script src="/js/bootstrap.min.js"></script>
+            <!-- date picker js -->
+            <script src="/js/vendor/bootstrap-datepicker.js"></script>
+            <!--counter up js-->
+            <script src="/js/waypoints.min.js"></script>
+            <script src="/js/jquery.counterup.min.js"></script>
+            <!-- Video player js -->
+            <script src="/js/video-player.js"></script>
+            <!-- headlines js -->
+            <script src="/js/animated-headlines.js"></script>
+            <!-- Ajax mail js -->
+            <script src="/js/mailchimp.js"></script>
+            <!-- Ajax mail js -->
+            <script src="/js/ajax-mail.js"></script>
+            <!-- parallax js -->
+            <script src="/js/parallax.js"></script>
+            <!-- textilate js -->
+            <script src="/js/textilate.js"></script>
+            <script src="/js/lettering.js"></script>
+            <!--isotope js-->
+            <script src="/js/isotope.pkgd.min.js"></script>
+            <script src="/js/packery-mode.pkgd.min.js"></script>
+            <!-- Style Customizer Js  -->
+            <script src="/js/style-customizer.js"></script>
+            <!-- Owl carousel Js -->
+            <script src="/js/owl.carousel.min.js"></script>
+            <!--Magnificant js-->
+            <script src="/js/jquery.magnific-popup.js"></script>
+            <!-- All js plugins included in this file. -->
+            <script src="/js/plugins.js"></script>
+            <!-- Main js file that contents all jQuery plugins activation. -->
+            <script src="/js/main.js"></script>
+            <!--custom js for all page-->
+            <script src="/js/clientCustom.js"></script>
+
+        </div>
+
+
+    </body>
+</html>

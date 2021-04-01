@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+	<title>Không tìm thấy trang le ducc vuong</title>
+</head>
+
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                                                                                                                       your
+                                                                                                                       browser</a>
+                          to improve your experience.</p>
+<![endif]-->
+
+<!-- Pre Loader
+============================================ -->
+<div class="preloader">
+	<div class="loading-center">
+		<div class="loading-center-absolute">
+			<div class="object object_one"></div>
+			<div class="object object_two"></div>
+			<div class="object object_three"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="wrapper">
+	<!--Header section start-->
+	<div class="header-section about-us">
+		<div class="bg-opacity"></div>
+		<div th:insert="client/fragment::navbar"></div>
+		<!-- ERROR AREA START -->
+		<div class="error-area text-center ptb-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="error-content ">
+							<h2>404</h2>
+							<h3>Page not found!</h3>
+							<h4>Oops! Looks like something going rong</h4>
+							<p>We can’t seem to find the page you’re looking for <br>
+							   make sure that you have typed the currect URL</p>
+							<a class="go-home" href="/">Go to home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Header section end-->
+	<!-- search bar Start -->
+	<div th:replace="client/fragment::search-bar"></div>
+	<!-- search bar End -->
+	<!-- Start page content -->
+
+
+	<!-- End page content -->
+	<!--hotel team start-->
+	<div class="hotel-team pt-100 white_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="team-brand pb-100">
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-1.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-4.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-3.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-4.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-5.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-1.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-4.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-3.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-4.jpg" alt=""></a>
+						</div>
+						<div class="single-team">
+							<a href="#"><img src="images/brand/b-5.jpg" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+</div>
+			</div>
+		</div>
+	</div>
+	<!--hotel team end-->
+	<!--Footer start -->
+	<th:block th:include="client/fragment::footer-copyright"></th:block>
+	<!-- Footer end -->
+</div>
+
+
+<div th:replace="client/fragment::javacriptLink"></div>
+</body>
+
+</html>

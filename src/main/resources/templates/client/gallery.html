@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+	<title>Thư viên ảnh</title>
+</head>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+                                                                                                                       your
+                                                                                                                       browser</a>
+                          to improve your experience.</p>
+<![endif]-->
+<!-- Pre Loader
+============================================ -->
+<div class="preloader">
+	<div class="loading-center">
+		<div class="loading-center-absolute">
+			<div class="object object_one"></div>
+			<div class="object object_two"></div>
+			<div class="object object_three"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="wrapper">
+	<!--Header section start-->
+	<div class="header-section about-us">
+		<div class="bg-opacity"></div>
+		<div th:insert="client/fragment::navbar"></div>
+		<!--Welcome secton-->
+		<div class="welcome-section text-center ptb-110">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="breadcurbs-inner">
+							<div class="breadcrubs">
+								<h2>Gallery</h2>
+								<div class="breadcrubs-menu">
+									<ul>
+										<li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
+										<li>Gallery</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--Header section end-->
+	<!-- search bar Start -->
+	<div th:replace="client/fragment::search-bar"></div>
+	<!-- search bar End -->
+	<!--Gallery Title start-->
+	<div class="Gallery-section text-center ptb-80 white_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-title mb-80">
+						<h2>All hotel <span>image</span></h2>
+						<!--						<p>There are many variations of passages of Lorem Ipsum available, but the majority have-->
+<!--						   suffered by injected humour.</p>-->
+					</div>
+				</div>
+			</div>
+			<div class="our-gallery-show">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-1.jpg"><img src="images/gallery/item3/g-1.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-2.jpg"><img src="images/gallery/item3/g-2.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-3.jpg"><img src="images/gallery/item3/g-3.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-4.jpg"><img src="images/gallery/item3/g-4.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-5.jpg"><img src="images/gallery/item3/g-5.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img mb-30">
+							<a href="images/gallery/item3/g-6.jpg"><img src="images/gallery/item3/g-6.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img">
+							<a href="images/gallery/item3/g-7.jpg"><img src="images/gallery/item3/g-7.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="single-gallery-img">
+							<a href="images/gallery/item3/g-8.jpg"><img src="images/gallery/item3/g-8.jpg" alt=""></a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4 hidden-xs">
+						<div class="single-gallery-img">
+							<a href="images/gallery/item3/g-9.jpg"><img src="images/gallery/item3/g-9.jpg" alt=""></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Room Section end-->
+	<!--hotel team start-->
+	<div class="hotel-team white_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+</div>
+			</div>
+		</div>
+
+	</div>
+	<!--hotel team end-->
+	<!--Footer start -->
+	<th:block th:include="client/fragment::footer-copyright"></th:block>
+	<!-- Footer end -->
+</div>
+
+
+<div th:replace="client/fragment::javacriptLink"></div>
+</body>
+
+</html>

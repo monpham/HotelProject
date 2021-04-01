@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:include="./include/adminHeader"></th:block>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                        </div>
+                    </div>
+
+                    <th:block th:include="./include/viewUserAfterLogin"></th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="row">
+                <th:block th:include="./include/adminMenu"></th:block>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3>Checkout Thành công</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="./include/adminFooter"></th:block>
+
+    </body>
+</html>

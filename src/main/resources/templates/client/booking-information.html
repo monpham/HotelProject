@@ -1,0 +1,354 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="client/fragment::baseHeader(~{::title},~{::link},~{})">
+        <title>Thông tin đặt phòng</title>
+        <link rel="stylesheet" href="/css/booking-information.css">
+    </head>
+
+
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade
+                your
+                browser</a>
+            to improve your experience.</p>
+        <![endif]-->
+        <!-- Pre Loader
+        ============================================ -->
+        <div class="preloader">
+            <div class="loading-center">
+                <div class="loading-center-absolute">
+                    <div class="object object_one"></div>
+                    <div class="object object_two"></div>
+                    <div class="object object_three"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <!--Header section start-->
+            <div class="header-section booking_done">
+                <div class="bg-opacity"></div>
+                <div th:insert="client/fragment::navbar"></div>
+                <!--Welcome secton-->
+                <div class="welcome-section text-center ptb-110">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="breadcurbs-inner">
+                                    <div class="breadcrubs">
+                                        <h2>Booking</h2>
+                                        <div class="breadcrubs-menu">
+                                            <ul>
+                                                <li><a href="#">Home<i class="mdi mdi-chevron-right"></i></a></li>
+                                                <li>Booking</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Header section end-->
+            <!-- search bar Start -->
+
+            <div th:replace="client/fragment::search-bar"></div>
+            <!-- search bar End -->
+
+            <!--Room booking start-->
+            <div class="room-booking ptb-80 white_bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-title mb-80 text-center">
+                                <h2>Booking <span>rooms</span></h2>
+                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                    suffered by injected humour.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="booking-rooms-tab">
+                                <ul class="nav" role="tablist">
+                                    <li class="active"><a id="bookingInfoTab" href="#booking" data-toggle="tab"><span
+                                            class="tab-border">1</span><span>Thông tin Phòng</span></a></li>
+                                    <li><a id="personalTab" href="#personal" data-toggle="tab"><span class="tab-border">2</span><span>Thông tin cá nhân</span></a>
+                                    </li>
+                                    <li><a id="paymentTab" href="#payment" data-toggle="tab"><span
+                                            class="tab-border">3</span><span>Thông tin thẻ</span></a></li>
+                                    <li><a ID="doneTab" href="#done" data-toggle="tab"><span
+                                            class="tab-border">4</span><span>Booking Done</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="service-tab-desc text-left mt-60">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="booking">
+                                        <div class="single-room-details">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th style="border: none">Ngày đến: [[${#temporals.format(@bookingCart.checkInDate,'dd/MM/yyyy')}]]</th>
+                                                    <th style="border: none">Ngày đi: [[${#temporals.format(@bookingCart.checkOutDate,'dd/MM/yyyy')}]]</th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1 id="duplicate-error"></h1>
+
+                                            <!-- bat dau vong lap-->
+                                            <div class="single-room-details fix"
+                                                 th:each="entry: ${@bookingCart.bookingItems}"
+                                                 th:with=
+                                                         "bookingItem=${entry.value}
+                                                         ,checkInDate=${@bookingCart.checkInDate}
+                                                         ,checkOutDate=${@bookingCart.checkOutDate}
+                                                         ,unitPrice=${bookingItem.room.roomType.unitPrice}
+                                                         ,adults=${bookingItem.adults}
+                                                         ,children=${bookingItem.children}
+                                                         ,subTotal=${bookingItem.calculateSubTotal(checkInDate, checkOutDate)}">
+                                                <div class="room-img">
+                                                    <img th:src="${bookingItem.room.roomType.roomTypeImages[0].path}" alt="room image">
+                                                </div>
+                                                <div class="single-room-details pl-50">
+                                                    <a th:href="@{/cart/removeRoom(roomId=${bookingItem.room.roomId})}" class="btn btn-danger">xoá</a>
+                                                    <h3 class="s_room_title">phòng số:
+                                                        [[${bookingItem.room.roomNumber}]], Loại phòng:
+                                                        [[${bookingItem.room.roomType.typeName}]]</h3>
+                                                    <div class="room_price">
+                                                        <h4>Đơn giá: [[${#numbers.formatInteger(unitPrice, 0,'COMMA')}]] Đ
+                                                            Đ/đêm</h4>
+                                                        <h5>Số đêm: [[${bookingItem.countNight(checkInDate,
+                                                            checkOutDate)}]]</h5>
+                                                        <h5>Thành tiền: [[${#numbers.formatInteger(subTotal,
+                                                            0,'COMMA')}]] Đ</h5>
+                                                        <h5>Số người lớn: [[${adults}]], số trẻ em: [[${children}]]</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--  ket thuc vong lap-->
+                                            <div style="clear: both">
+                                                <div>
+                                                    <form id="promotionForm" action="/cart/checkPromotion" method="POST">
+                                                        <input type="text" placeholder="nhập mã giảm giá nếu có" name="promotionCode">
+                                                        <input type="submit" value="Kiểm tra">
+                                                    </form>
+                                                    <p id="message" th:if="${message}" th:text="${message}"></p>
+                                                </div>
+
+                                                <h3 style="color:#3ac4fa;" id="promotion" th:if="${@bookingCart.promotion.promotionValue} != 0">
+                                                    Giảm giá:
+                                                    [[${#numbers.formatInteger(@bookingCart.promotion.promotionValue,
+                                                    0,'COMMA')}]] Đ</h3>
+                                                    </h3>
+
+                                                <h3 style="color:#3ac4fa;">Tổng Thanh toán:
+                                                    [[${#numbers.formatInteger(@bookingCart.calculateTotal(),
+                                                    0,'COMMA')}]] Đ</h3>
+                                                <div class="prve-next-box mt-40">
+                                                    <button type="button" id="nextToPersonal">Tiếp tục</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="single-room-booking-form mt-60">
+                                                <div class="booking_form_inner">
+                                                    <form th:action="@{/search-available-room}" method="POST">
+                                                        <div class="single-form-part">
+                                                            <!--ngày đến-->
+                                                            <div class="date-to mb-20">
+                                                                <input type="text" placeholder="Ngày đến" name="checkInDate" th:value="${#temporals.format(@bookingCart.checkInDate,'dd/MM/yyyy')}" readonly>
+                                                            </div>
+                                                            <div>
+                                                                <input type="number" placeholder="Số người lớn" name="adults" required min="1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-form-part">
+                                                            <div class="date-to mb-20">
+                                                                <!--ngày đi-->
+                                                                <input type="text" placeholder="Ngày đi" name="checkOutDate" th:value="${#temporals.format(@bookingCart.checkOutDate,'dd/MM/yyyy')}" readonly>
+                                                            </div>
+                                                            <div>
+                                                                <input type="number" placeholder="Số trẻ em" name="children" required min="1">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="single-form-part">
+                                                            <div class="submit-form">
+                                                                <button type="submit">Tìm kiếm</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="personal">
+                                        <div class="personal-info-details">
+                                            <div class="booking-info-inner">
+                                                <form action="#" id="personalForm">
+                                                    <div class="booking-form-list">
+                                                        <div class="single-form-part">
+                                                            <div class="name mb-15">
+                                                                <input type="text" placeholder="Họ" name="lastName" tabindex="1" required>
+                                                            </div>
+                                                            <div class="select-option" tabindex="4" required>
+                                                                <select name="gender">
+                                                                    <option value="MALE" selected>Nam</option>
+                                                                    <option value="FEMALE">Nữ</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-form-part">
+                                                            <div class="name mb-15">
+                                                                <input type="text" placeholder="Tên" name="firstName" tabindex="2" required>
+                                                            </div>
+                                                            <!--													for phone-->
+                                                            <div class="name mb-15">
+                                                                <input type="text" placeholder="Số điện thoại" name="phone" tabindex="5" required pattern="\d{10}" title="Số điện thoải phải là 10 ký tự số">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="single-form-part">
+                                                            <div class="mail mb-15">
+                                                                <input type="email" placeholder="Your Email" name="email" tabindex="3" required>
+                                                            </div>
+                                                            <!--for email -->
+                                                            <div class="name mb-15">
+                                                                <input type="text" name="indentifyNo" placeholder="CMND" tabindex="6" required pattern="\d{9}" title="Số CMND phải là 9 ký tự số">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="prve-next-box mt-40">
+
+                                                        <button id="NextToPayment" type="submit">Tiếp Tục</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="payment">
+                                        <div class="payment-info">
+                                            <form action="#" id="payForm" method="POST">
+                                                <div class="payment-form">
+                                                    <div class="payment-form-list">
+                                                        <div class="single_form">
+                                                            <input type="text" name="ownerName" placeholder="Tên Chủ thẻ" required>
+                                                        </div>
+                                                        <div class="single_form">
+                                                            <input type="text" name="cardNumber" placeholder="Số tài khoản" required pattern="\d{15}" title="Số tải khoản phải là 15 số">
+                                                        </div>
+                                                        <div class="single_form">
+                                                            <input type="text" name="expiryMonth" placeholder="Tháng hết hạn" required pattern="(^0?[1-9]$)|(^1[0-2]$)" title="Tháng phải từ số 1 đến 12">
+                                                        </div>
+                                                        <div class="single_form">
+                                                            <input type="text" name="expiryYear" placeholder="Năm hết hạn" required pattern="2\d{3}" title="Năm phải là 4 ký tự bắt đầu bằng số 2">
+                                                        </div>
+                                                        <div class="pay-money-form mt-40">
+                                                            <div class="payment-card">
+                                                                <a href="#"><img src="/images/logo/pay-card.png" alt=""></a>
+                                                            </div>
+                                                            <div class="pay-order">
+                                                                <button type="submit">Thanh toán</button>
+                                                            </div>
+                                                        </div>
+                                                        <div id="credit-cart-error"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                        <div class="booking-done-table table-responsive text-center">
+                                            <table class="table">
+
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Số Phòng</th>
+                                                        <th>Số Đêm</th>
+                                                        <th>Giảm Giá</th>
+                                                        <th>Thanh Toán</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:with="checkInDate=${@bookingCart.checkInDate},checkOutDate=${@bookingCart.checkOutDate}">
+                                                        <th th:text="${@bookingCart.bookingItems.size()}"></th>
+                                                        <th th:text="${@bookingCart.bookingItems.values()[0].countNight(checkInDate, checkOutDate)}"></th>
+                                                        <th>
+                                                            [[${#numbers.formatInteger(@bookingCart.promotion.promotionValue,
+                                                            0,'COMMA')}]] Đ
+                                                        </th>
+                                                        <th>[[${#numbers.formatInteger(@bookingCart.calculateTotal(),
+                                                            0,'COMMA')}]] Đ
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="done">
+                                        <div class="booking-done">
+                                            <div class="booking-done-table table-responsive text-center">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><p>1 Room <span>Five Adult &amp; 1 child</span></p></td>
+                                                            <td><p>$120 <span>Rate</span></p></td>
+                                                            <td><p>5 <span>night</span></p></td>
+                                                            <td><p>$550</p></td>
+                                                        </tr>
+                                                        <tr class="row2">
+                                                            <td><p>tax <span>20% tax</span></p></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><p>$90</p></td>
+                                                        </tr>
+                                                        <tr class="row3">
+                                                            <td><p>Total</p></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><p>$640</p></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="booking-done-description">
+                                                <p id="bookingCode"></p>
+                                                <div class="succesfully">
+                                                    <strong>Your reservation was succefully submited!!</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Room booking end-->
+
+            <!--hotel team start-->
+
+            <!--hotel team end-->
+            <!--Footer start -->
+            <th:block th:include="client/fragment::footer-copyright"></th:block>
+            <!-- Footer end -->
+        </div>
+
+
+        <div th:replace="client/fragment::javacriptLink"></div>
+        <script src="/js/booking-information.js"></script>
+
+
+
+
+    </body>
+
+</html>

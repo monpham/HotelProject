@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:include="./include/adminHeader"></th:block>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                        </div>
+                    </div>
+                    <th:block th:include="./include/viewUserAfterLogin"></th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="row">
+                <th:block th:include="./include/adminMenu"></th:block>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="content-box-large">
+                                <div class="panel-body">
+                                    <h1 style="text-align: center; font-weight: bold">TẤT CẢ CÁC DỊCH VỤ</h1>
+                                    <table class="table">
+                                        <colgroup>
+                                            <col style="width:5%">
+                                            <col style="width:15%">
+                                            <col style="width:60%">
+                                            <col style="width:10%">
+                                            <col style="width:10%">
+                                        </colgroup>
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col"> ID</th>
+                                                <th scope="col">tên dịch vụ</th>
+                                                <th scope="col">Mô tả</th>
+                                                <th scope="col">Đơn vị</th>
+                                                <th scope="col">Đơn giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="service : ${services}">
+                                                <td th:text="${service.serviceId}"></td>
+                                                <td th:text="${service.serviceName}"></td>
+                                                <td th:text="${service.description}"></td>
+                                                <td th:text="${service.unit}"></td>
+                                                <td th:text="${#numbers.formatInteger(service.unitPrice,0,'COMMA') + ' Đ'}"></td>
+                                                <td>
+                                                    <a class="btn btn-info" th:href="@{/admin/editService/__${service.serviceId}__ }">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-danger" th:href="@{/admin/deleteService/__${service.serviceId}__}"
+                                                       onclick="return ConfirmDelete();">Delete</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div style="text-align: center">
+                                        <a th:if="${currentPage >1}" th:href="@{/admin/viewAllService/page/1}">First</a>
+                                        <span th:unless="${currentPage >1}" th:href="@{/admin/viewAllService/page/1}">First</span>
+                                        &nbsp;&nbsp;
+
+                                        <a th:if="${currentPage >1}" th:href="@{'/admin/viewAllService/page/' + ${currentPage -1}}">Pervious</a>
+                                        <a th:unless="${currentPage >1}" th:href="@{'/admin/viewAllService/page/' + ${currentPage -1}}">Pervious</a>
+                                        &nbsp;&nbsp;
+
+                                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                    <a th:if="${ i != currentPage}" th:href="@{'/admin/viewAllService/page/' +${i}}">[[${i}]]</a>
+                                    <span th:unless="${ i != currentPage}" th:href="@{'/admin/viewAllService/page/' +${i}}">[[${i}]]</span>
+                                    &nbsp;&nbsp;
+                                </span>
+
+                                        &nbsp;&nbsp;
+                                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/viewAllService/page/' + ${currentPage + 1}}">Next</a>
+                                        <span th:unless="${currentPage < totalPages}">Next</span>
+                                        &nbsp;&nbsp;
+                                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/viewAllService/page/' + ${totalPages}}">Last</a>
+                                        <span th:unless="${currentPage < totalPages}">Last</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <th:block th:include="./include/adminFooter"></th:block>
+        <script>
+            function ConfirmDelete() {
+                var x = confirm("Ban co muon xoa dich vu nay?");
+                if (x)
+                    return true;
+                else
+                    return false;
+            }
+        </script>
+    </body>
+</html>

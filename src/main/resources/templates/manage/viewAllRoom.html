@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="./include/adminHeader"></th:block>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form th:action="@{searchRoom}"  method="post">
+                        <div class="input-group form">
+                            <input type="text" class="form-control" name="searchRoom" placeholder="Tìm kiếm phòng hoặc tầng">
+                            <span class="input-group-btn">
+	                         <button class="btn btn-primary" type="submit">TÌM KIẾM</button>
+	                       </span>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <th:block th:include="./include/viewUserAfterLogin"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <th:block th:include="./include/adminMenu"></th:block>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            <h1 style="text-align: center; font-weight: bold">TẤT CẢ CÁC PHÒNG</h1>
+                            <br>
+                            <a href="/admin/addNewRoom" style="font-size: 18px">THÊM MỚI PHÒNG</a>
+                            <br>
+                            <span style="color: red" th:text="${errorMessage}"></span>
+                            <br>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"> ID</th>
+                                    <th scope="col">Số phòng</th>
+                                    <th scope="col">Tầng</th>
+                                    <th scope="col">Loại phòng</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="room : ${rooms}">
+                                    <td th:text="${room.roomId}"></td>
+                                    <td th:text="${room.roomNumber}"></td>
+                                    <td th:text="${room.floor}"></td>
+                                    <td th:text="${room.roomType.typeName}"></td>
+                                    <td><a class="btn btn-info" th:href="@{/admin/editRoom/__${room.roomId}__ }">Edit</a></td>
+                                    <td><a class="btn btn-danger" th:href="@{/admin/deleteRoom/__${room.roomId}__}"
+                                           onclick="return ConfirmDelete();">Delete</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align: center">
+                                <a th:if="${currentPage >1}" th:href="@{/admin/viewAllRoom/page/1}">First</a>
+                                <span th:unless="${currentPage >1}" th:href="@{/admin/viewAllRoom/page/1}">First</span>
+                                &nbsp;&nbsp;
+
+                                <a th:if="${currentPage >1}" th:href="@{'/admin/viewAllRoom/page/' + ${currentPage -1}}">Pervious</a>
+                                <a th:unless="${currentPage >1}" th:href="@{'/admin/viewAllRoom/page/' + ${currentPage -1}}">Pervious</a>
+                                &nbsp;&nbsp;
+
+                                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                    <a th:if="${ i != currentPage}" th:href="@{'/admin/viewAllRoom/page/' +${i}}">[[${i}]]</a>
+                                    <span th:unless="${ i != currentPage}" th:href="@{'/admin/viewAllRoom/page/' +${i}}">[[${i}]]</span>
+                                    &nbsp;&nbsp;
+                                </span>
+
+                                &nbsp;&nbsp;
+                                <a th:if="${currentPage < totalPages}" th:href="@{'/admin/viewAllRoom/page/' + ${currentPage + 1}}">Next</a>
+                                <span th:unless="${currentPage < totalPages}" >Next</span>
+                                &nbsp;&nbsp;
+                                <a th:if="${currentPage < totalPages}" th:href="@{'/admin/viewAllRoom/page/' + ${totalPages}}">Last</a>
+                                <span th:unless="${currentPage < totalPages}" >Last</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<th:block th:include="./include/adminFooter"></th:block>
+<script>
+    function ConfirmDelete() {
+        var x = confirm("Ban co muon xoa phong nay?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+</body>
+</html>

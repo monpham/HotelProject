@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <th:block th:include="./include/adminHeader"></th:block>
+    <body>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                        </div>
+                    </div>
+                    <th:block th:include="./include/viewUserAfterLogin"></th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="row">
+                <th:block th:include="./include/adminMenu"></th:block>
+
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="content-box-large">
+                                <div class="panel-body">
+                                    <form class="form-horizontal" th:action="@{/admin/saveOrUpdate}" th:object="${service}" method="post">
+                                        <legend>THÊM MỚI DỊCH VỤ</legend>
+
+                                        <input th:if="${#strings.containsIgnoreCase(#request.getRequestURL(),'edit')}" type="hidden" th:field="*{serviceId}">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Tên dịch vụ</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" th:field="*{serviceName}" placeholder="Nhập tên dịch vụ">
+                                                <p th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}" class="error">
+                                                    error placehoader</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Mô tả</label>
+                                            <div class="col-md-10">
+                                                <textarea th:field="*{description}" style="width: 100%; resize: none" placeholder="Nhập mô tả"></textarea>
+                                                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">
+                                                    error placehoader</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">đơn vị tính</label>
+                                            <div class="col-md-10">
+                                                <input type="text" th:field="*{unit}" style="width: 100%" placeholder="Nhập Đơn vị tính">
+                                                <p th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}" class="error">
+                                                    error placehoader</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Đơn giá</label>
+                                            <div class="col-md-10">
+                                                <input type="text" th:field="*{unitPrice}" style="width: 100%" placeholder="Nhập đơn giá">
+                                                <p th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}" class="error">
+                                                    error placehoader</p>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-default" type="reset">
+                                                        Reset
+                                                    </button>
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="fa fa-save"></i>
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <th:block th:include="./include/adminFooter"></th:block>
+
+    </body>
+</html>

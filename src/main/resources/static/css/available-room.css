@@ -1,0 +1,14 @@
+.single-room.mb-80 > .room-img {
+    position: relative;
+}
+
+.single-room.mb-80 > .room-img > a {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+}
+
+.single-room.mb-80 > .room-img:hover > a {
+    display: inline;
+}

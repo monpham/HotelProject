@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="./include/adminHeader"></th:block>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                </div>
+            </div>
+
+            <th:block th:include="./include/viewUserAfterLogin"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <th:block th:include="./include/adminMenu"></th:block>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            <h1 style="text-align: center; font-weight: bold">TẤT CẢ CÁC TÀI KHOẢN</h1>
+                            <br>
+                            <a href="/admin/addNewAccount" style="font-size: 18px">THÊM TÀI KHOẢN</a>
+                            <br>
+                            <span style="color: red" th:text="${errorMessage}"></span>
+                            <br>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"> ID</th>
+                                    <th scope="col">Tên tài khoản</th>
+                                    <th scope="col">Quyền</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="account : ${accounts}">
+                                    <td th:text="${account.getId()}"></td>
+                                    <td th:text="${account.getUsername()}"></td>
+                                    <td th:text="${account.getRole().getRoleName()}"></td>
+                                    <td><a class="btn btn-danger" th:href="@{/admin/deleteAccount/__${account.getId()}__}"
+                                           onclick="return ConfirmDelete();">Delete</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<th:block th:include="./include/adminFooter"></th:block>
+<script>
+    function ConfirmDelete() {
+        var x = confirm("Ban co muon xoa Account nay?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+</body>
+</html>

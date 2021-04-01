@@ -1,0 +1,29 @@
+
+
+#myCarousel {
+    position: relative;
+}
+
+#myCarousel a#btnBooking {
+    position: absolute;
+    top: 46%;
+    left: 42%;
+    height: 50px;
+    width: 105px;
+    line-height: 49px;
+    border: none;
+}
+
+
+.carousel-inner a.btn.btn-primary {
+    display: none;
+    border-radius: 3px;
+    box-shadow:3px 3px 0 0 #337ab7;
+
+}
+
+.carousel-inner:hover a.btn.btn-primary {
+    display: inline;
+
+
+}

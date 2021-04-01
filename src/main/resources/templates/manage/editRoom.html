@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<th:block th:include="./include/adminHeader"></th:block>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                </div>
+            </div>
+
+            <th:block th:include="./include/viewUserAfterLogin"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <th:block th:include="./include/adminMenu"></th:block>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            <form class="form-horizontal" th:action="@{/admin/saveEditRoom}" th:object="${room}" method="post">
+
+                                <legend>CHỈNH SỬA PHÒNG</legend>
+                                <input type="hidden" th:field="*{roomId}" >
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Phòng số</label>
+                                    <div class="col-md-2">
+                                        <input class="form-control" placeholder="Phòng số" type="number" min="1" th:field="*{roomNumber}">
+                                        <span style="color: red" th:text="${errorMessage}"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Tầng</label>
+                                    <div class="col-md-2">
+                                        <input class="form-control" placeholder="Tầng" type="number" min="1" max="7" th:field="*{floor}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Loại phòng</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" th:field="*{roomType.roomTypeId}" required>
+                                            <option th:each="roomType : ${roomTypeList}"
+                                                    th:text="${roomType.typeName}"
+                                                    th:value="${roomType.roomTypeId}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-default" type="reset">
+                                                Reset
+                                            </button>
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fa fa-save"></i>
+                                                Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="./include/adminFooter"></th:block>
+
+</body>
+</html>

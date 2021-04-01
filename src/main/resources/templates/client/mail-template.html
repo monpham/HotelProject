@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <style>
+            p {
+                font-size: 1.5em;
+            }
+        </style>
+        <!-- Bootstrap core CSS -->
+
+        <link href="/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Xin chào [[${firstName}]]</h1>
+        <p>Cảm ơn bạn đã đặt phòng tại trang web abc.vn</p>
+        <p>Mã đặt phòng của bạn là: <span style="background-color: pink;">[[${bookingCode}]]</span></p>
+        <p>Để tra cứu thông tin  và huỷ đặt phòng xin mời vào <a href="http://localhost:8080/lookup">Đây</a></p>
+
+    </body>
+</html>

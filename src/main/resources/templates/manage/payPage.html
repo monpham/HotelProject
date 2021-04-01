@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="./include/adminHeader"></th:block>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html">TRANG QUẢN TRỊ</a></h1>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="input-group form">
+                            <input type="text" class="form-control" placeholder="TÌM KIẾM...">
+                            <span class="input-group-btn">
+	                         <button class="btn btn-primary" type="button">TÌM KIẾM</button>
+	                       </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <th:block th:include="./include/viewUserAfterLogin"></th:block>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="row">
+        <th:block th:include="./include/adminMenu"></th:block>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="content-box-large">
+                        <div class="panel-body">
+                            <form class="form-horizontal"  method="post" action="/admin/checkOut" >
+
+                                <legend style="text-align: center">THANH TOÁN</legend>
+
+                                <input type="hidden" name="bookingId" th:value="${bookingId}">
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Tên chủ thẻ</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" placeholder="Tên chủ thẻ" type="text" required name="ownerName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Số tài khoản</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" placeholder="Số tài khoản" type="text" required pattern="\d{15}" title="Số tải khoản phải là 15 số"  name="cardNumber">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Tháng hết hạn</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" placeholder="Tháng hết hạn" type="text" required pattern="(^0?[1-9]$)|(^1[0-2]$)" title="Tháng phải từ số 1 đến 12" name="expiryMonth">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >Năm hết hạn</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" placeholder="Năm hết hạn" type="text" required pattern="2\d{3}" title="Năm phải là 4 ký tự bắt đầu bằng số 2" name="expiryYear">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="payment-form">
+                                    <div class="payment-form-list">
+
+
+                                        <div class="pay-money-form mt-40">
+                                            <div class="payment-card">
+                                                <a href="#"><img src="/images/logo/pay-card.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div th:if="${message} != null"  th:text="${message}" id="credit-cart-error"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fa fa-save"></i>
+                                                Thanh toán
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="./include/adminFooter"></th:block>
+
+</body>
+</html>

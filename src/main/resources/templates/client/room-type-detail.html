@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="client/fragment::baseHeader(~{::title},~{},~{})">
+        <title>Chi Tiết phòng</title>
+    </head>
+
+
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+                href="http://browsehappy.com/">upgrade
+            your
+            browser</a>
+            to improve your experience.
+        </p>
+        <![endif]-->
+
+        <!-- Pre Loader
+        ============================================ -->
+        <div class="preloader">
+            <div class="loading-center">
+                <div class="loading-center-absolute">
+                    <div class="object object_one"></div>
+                    <div class="object object_two"></div>
+                    <div class="object object_three"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wrapper">
+            <!--Header section start-->
+            <div class="header-section about-us">
+                <div class="bg-opacity"></div>
+                <div th:insert="client/fragment::navbar"></div>
+                <!-- ERROR AREA START -->
+                <div class="">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header section end-->
+            <!-- search bar Start -->
+            <div th:replace="client/fragment::search-bar"></div>
+            <!-- search bar End -->
+            <!-- Start page content -->
+
+
+            <!-- End page content -->
+            <!--hotel team start-->
+            <div class="hotel-team pt-100 white_bg">
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1500">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" th:attr="data-slide-to=${status.index}"
+                                    th:classappend="${status.index == 0}? 'active'"
+                                    th:each="image, status: ${roomType.roomTypeImages}">
+                                </li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item" th:classappend="${status.index == 0}? 'active'" th:each="image, status: ${roomType.roomTypeImages}">
+                                    <img th:src="@{${image.path}}" style="width:100%;">
+                                </div>
+                                <a th:href="@{/book-by-type(roomTypeId=${param.roomTypeId})}" class="btn btn-primary" id="btnBooking">đặt
+                                    ngay</a>
+
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Loại Phòng: <span th:text="${roomType.typeName}"></span></h4>
+                        <h4>Người lớn: <span>[[${roomType.adultCapacity}]]</span></h4>
+                        <h4>Trẻ em: <span>[[${roomType.childrenCapacity}]]</span></h4>
+                        <h4>Đơn giá: <span>[[${#numbers.formatInteger(roomType.unitPrice,0,'COMMA')}]] Đ</span></h4>
+                        <h4>Mô tả : <span th:text="${roomType.description}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="container convenience">
+                    <div class="col-sm-12">
+                        <h2>Tiện Nghi:</h2>
+                        <ul class="list-unstyled card-columns">
+                            <li th:text="${convenience.convenienceName}" th:each="convenience: ${roomType.conveniences}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!--hotel team end-->
+        <!--Footer start -->
+        <th:block th:include="client/fragment::footer-copyright"></th:block>
+        <link rel="stylesheet" href="/css/room-detail.css">
+        <!-- Footer end -->
+
+
+        <div th:replace="client/fragment::javacriptLink"></div>
+
+    </body>
+
+</html>
